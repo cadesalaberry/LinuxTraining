@@ -1,0 +1,7 @@
+$30.00
+$30.000
+This is $00.00
+This is not $20.00.
+$20.45 is a better price.
+transactions.txt: 5 lines, modified on 2013-01-23
+transactions.txt: 6 lines, modified on 2013-01-23
