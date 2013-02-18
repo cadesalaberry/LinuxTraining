@@ -1,8 +1,28 @@
 #ifndef Q4_H
 #define Q4_H
+#define FIB_MAX 20
 
-int fib[20];
+unsigned int fib[FIB_MAX];
 
+/**
+ * builds the Fibonacci sequence in the fib array;
+ * 
+ * 
+ */
+void buildFib() {
+	
+	fib[0] = 0;
+	fib[1] = 1;
+
+	unsigned int i;
+
+	for (i=2; i < FIB_MAX; i++) {
+
+		fib[i] = fib[i-1] + fib[i-2];
+
+	}
+}
+ 
 /**
  * return the specifiede element of fibonacci array
  * idx: the index of element we want to return
@@ -13,7 +33,8 @@ int fib[20];
  */
 int Fibonacci(int idx)
 {
-	//TODO: build the fibonacci array, save values in fix;
+	// Builds the sequence if it is not already built.
+	if (fib[2] != 1) buildFib();
 	
 	return fib[idx];
 }
