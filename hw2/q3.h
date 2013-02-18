@@ -11,10 +11,18 @@
  */
 int BinarySearch(int ele, int seq[], int startIdx, int endIdx)
 {
-	int pos = -1;
-	//TODO: fill your code here
-	
-	return pos;
+	if (seq[startIdx] == ele) {
+		
+		return startIdx;
+	}
+	else if (startIdx == endIdx) {
+		
+		return -1;
+	}
+	else {
+		
+		return BinarySearch(ele, seq, startIdx + 1, endIdx);
+	}
 }
 
 #endif
