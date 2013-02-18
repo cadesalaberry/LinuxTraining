@@ -1,5 +1,5 @@
 CC=gcc
-CC_FLAGS=-g -O2 -c
+CC_FLAGS=-g -O2 -c -Wall
 OBJECTS=q1.o q2.o q3.o q4.o q5.o
 
 all:$(OBJECTS)
