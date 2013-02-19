@@ -11,18 +11,25 @@
  */
 int BinarySearch(int ele, int seq[], int startIdx, int endIdx)
 {
-	if (seq[startIdx] == ele) {
-		
-		return startIdx;
-	}
-	else if (startIdx == endIdx) {
+	int midpoint = (startIdx+endIdx)/2;
+	
+	if (startIdx >= endIdx) {
 		
 		return -1;
 	}
-	else {
-		
-		return BinarySearch(ele, seq, startIdx + 1, endIdx);
+	else if (seq[midpoint] > ele) {
+		// Considers only the first half of the sequence.
+		return BinarySearch(ele, seq, startIdx, midpoint-1);
 	}
+	else if (seq[midpoint] < ele) {
+		// Considers only the second half of the sequence.
+		return BinarySearch(ele, seq, midpoint+1, endIdx);
+	}
+	else if (seq[midpoint] == ele) {
+		return midpoint;
+	}
+	
+	return -1;
 }
 
 #endif
