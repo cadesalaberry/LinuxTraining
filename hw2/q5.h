@@ -10,14 +10,14 @@
 /**
  * Swapes the position of 2 letters.
  */ 
-void swap(char *first,char *second)
+void swap(char *string, int start, int end)
 {
 	char temp;
-	while(first < second)
+	while(start < end)
 	{
-		temp = *first;
-		*first++ = *second;
-		*second-- = temp;
+		temp = string[start];
+		string[start++] = string[end];
+		string[end--] = temp;
 	}
 }
 
@@ -27,24 +27,34 @@ char *reverse(char const *input)
 	//TODO:preprocess
 	//the input may end with a \n, so you have to strip that
 	
-	int size = strlen(ret)-1;
-	int cursor=0;
-	while(cursor < size) {
-		if (input[cursor] == '\n') {
-			ret[cursor] = ' ';
-		} else {
-			ret[cursor] = input[cursor];
+	int size = strlen(input);
+	
+	// Copies the string.
+	strcpy(ret,input);
+	
+	// Strips the '\n' character.
+	int i;
+	for(i = 0; i < size; i++) {
+		if (ret[i] == '\n') ret[i] = ' ';
+	}
+	
+	// Swaps the entire string.
+	swap(ret, 0, size-2);
+
+	// Swaps back the words one by one.
+	int old = 0;
+	for(i = 1; i <= size; i++) {
+		
+		if (!(i < size)) {
+			// Checks for the last word
+			swap(ret, old+1, size-1);
+			
+		} else if (ret[i] == ' ') {
+			swap(ret, old, i);
+			old = i;
 		}
 	}
-	
-	int i, j;
-	for (i = size, j=0 ; 0 <= i, j < size; i--, j++) {
-		swap(&ret[i], &ret[j]);
-	}
-	
-	printf("%s", ret);
-	//TODO:reverse input, and save the result in ret
-	
+
 	return ret;
 }
 
