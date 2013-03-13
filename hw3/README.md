@@ -25,7 +25,7 @@ Emails would be filtered according to the subject, so students must follow the s
 
 Write a program called **printFile.c** that takes the name of a text file and outputs the entire text of it onto the screen. Make the executable named printFile, so if I type
 
-	“./printFile myFile.txt”
+	./printFile myFile.txt
 
 I can view the file on screen.
 
@@ -44,8 +44,8 @@ Write a program processing your phone book using random access files. The progra
 
 * Option 5 calls the function *printAllToFile* to list all the phone records in a text file named **phones.txt** that may be printed later.
 
-You are asked to write the 5 functions which are declared in the given code. Inside the functions, you may want to get user’s first name and last name from the **STDIN**, and use the information to locate the record of a given user in the file **myPhoneBook**. You may consider using fread and fwrite functions in your implementation. Note that the function *deleteRecord* doesn’t need to remove the record from the file, you only need to mark the *phoneNum* field invalid for the given record.
 
+You are asked to write the 5 functions which are declared in the given code. Inside the functions, you may want to get user’s first name and last name from the **STDIN**, and use the information to locate the record of a given user in the file **myPhoneBook**. You may consider using fread and fwrite functions in your implementation. Note that the function *deleteRecord* doesn’t need to remove the record from the file, you only need to mark the *phoneNum* field invalid for the given record.
 Below is the code in phonebook.c:
 
 	//Phone book processing program reads a random-access file sequentially, updates records already
