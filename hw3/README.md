@@ -32,9 +32,19 @@ I can view the file on screen.
 
 ### 2. Basic Contact Manager *__/3*
 
-Write a program processing your phone book using random access files. The program is able to update existing records, adding new records, deleting records, retrieving records, and storing all the records in a text file for printing. Let us assume that the address book is named as myPhoneBook, which is empty initially. When you update, add or delete records, the myPhoneBook will be updated accordingly. The main program is given, and it has 5 options. Option 1 calls the function addRecord to add a new phone record to the file myPhoneBook. Option 2 calls the function findPhoneNum to print the phone number of a given user. Option 3 calls the function updateRecord to update a phone number that already exists. Option 4 calls the function deleteRecord to delete a record from the file. Option 5 calls the function printAllToFile to list all the phone records in a text file named phones.txt that may be printed later.
+Write a program processing your phone book using random access files. The program is able to update existing records, adding new records, deleting records, retrieving records, and storing all the records in a text file for printing. Let us assume that the address book is named as **myPhoneBook**, which is empty initially. When you update, add or delete records, the myPhoneBook will be updated accordingly. The main program is given, and it has 5 options.
 
-You are asked to write the 5 functions which are declared in the given code. Inside the functions, you may want to get user’s first name and last name from the STDIN, and use the information to locate the record of a given user in the file myPhoneBook. You may consider using fread and fwrite functions in your implementation. Note that the function deleteRecord doesn’t need to remove the record from the file, you only need to mark the phoneNum field invalid for the given record.
+* Option 1 calls the function *addRecord* to add a new phone record to the file **myPhoneBook**.
+
+* Option 2 calls the function *findPhoneNum* to print the phone number of a given user.
+
+* Option 3 calls the function *updateRecord* to update a phone number that already exists.
+
+* Option 4 calls the function *deleteRecord* to delete a record from the file.
+
+* Option 5 calls the function *printAllToFile* to list all the phone records in a text file named **phones.txt** that may be printed later.
+
+You are asked to write the 5 functions which are declared in the given code. Inside the functions, you may want to get user’s first name and last name from the **STDIN**, and use the information to locate the record of a given user in the file **myPhoneBook**. You may consider using fread and fwrite functions in your implementation. Note that the function *deleteRecord* doesn’t need to remove the record from the file, you only need to mark the *phoneNum* field invalid for the given record.
 
 Below is the code in phonebook.c:
 
