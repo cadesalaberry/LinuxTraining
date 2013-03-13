@@ -11,14 +11,16 @@
 
 Students should email their submissions to sandeepwadhwani09.gmail@com
 Below is the format that should be followed:
+
 **SUBJECT:** COMP-206 Homework-3 of *STUDENT NAME* (*McGill ID*)
+
 **FILES:** *STUDENT NAME* (*McGill ID*).zip
 
 
 Emails would be filtered according to the subject, so students must follow the subject guidelines.
 
 
-### *__/2* 1. File viewer
+### 1. File viewer *__/2*
 
 
 Write a program called **printFile.c** that takes the name of a text file and outputs the entire text of it onto the screen. Make the executable named printFile, so if I type
@@ -28,7 +30,7 @@ Write a program called **printFile.c** that takes the name of a text file and ou
 I can view the file on screen.
 
 
-### *__/3* 2. Basic Contact Manager
+### 2. Basic Contact Manager *__/3*
 
 Write a program processing your phone book using random access files. The program is able to update existing records, adding new records, deleting records, retrieving records, and storing all the records in a text file for printing. Let us assume that the address book is named as myPhoneBook, which is empty initially. When you update, add or delete records, the myPhoneBook will be updated accordingly. The main program is given, and it has 5 options. Option 1 calls the function addRecord to add a new phone record to the file myPhoneBook. Option 2 calls the function findPhoneNum to print the phone number of a given user. Option 3 calls the function updateRecord to update a phone number that already exists. Option 4 calls the function deleteRecord to delete a record from the file. Option 5 calls the function printAllToFile to list all the phone records in a text file named phones.txt that may be printed later.
 
@@ -41,9 +43,10 @@ Below is the code in phonebook.c:
 	//records in the file.
 	
 	#include<stdio.h>
-	//Phone record structure definition
 
-	struct phoneRecord{
+
+	//Phone record structure definition
+	struct phoneRecord {
 		char lastName[20];
 		char firstName[20];
 		char phoneNum[15];
@@ -55,6 +58,8 @@ Below is the code in phonebook.c:
 	void updateRecord(FILE *fPtr);
 	void deleteRecord(FILE *fPtr);
 	void printAllToFile(File *fPtr);
+
+
 	int main(void)
 	{
 		FILE * fPtr; //myPhoneBook file pointer
@@ -91,7 +96,6 @@ Below is the code in phonebook.c:
 
 	unsigned int enterChoice(void)
 	{
-
 		unsigned int menuChoice; //variable to store user’s choice
 
 		// display available options
