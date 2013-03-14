@@ -13,7 +13,7 @@ int main(void)
 	unsigned int choice; // user’s choice
 
 	//fopen opens the file; exists if file cannot be opened
-	if( (fPtr = fopen("myPhoneBook", "rb+") ) == NULL ) {
+	if( (fPtr = fopen("myPhoneBookDB", "rb+") ) == NULL ) {
 
 		puts("File cannot be opened.\n");
 	}
