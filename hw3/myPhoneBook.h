@@ -6,116 +6,118 @@ struct phoneRecord {
 	char lastName[20];
 	char firstName[20];
 	char phoneNum[15];
-};
+} phoneRecord;
 
+struct phoneRecord phoneBook[69];
+int curr = 0;
 
-int askFor(char * asked, char * value) {
+void askFor(char * asked, char * value) {
 
-	printf("%s?\n", asked);
+	printf("%s (do not use spaces) ? ", asked);
+	fflush(stdout);
 	scanf("%s", value);
-	return 0;
 }
 
-void reachString() {
+void printContact(struct phoneRecord record, FILE * file) {
 
+	// Reaches the end of the stream
+	//fseek(file, 0, SEEK_END);
+
+	// Writes the contact at the end of the stream.
+	fprintf(file, "%s ",  record.firstName);
+	fprintf(file, "%s\n", record.lastName);
+	fprintf(file, "%s\n", record.phoneNum);
 }
 
-void writeContact(struct phoneRecord record, FILE * file) {
+void printContacts(FILE * file) {
 
-	// Reaches the end of the file
-	fseek(file, 0, SEEK_END);
+	int i;
+	for (i=0; i < curr; i++) {
+		printContact(phoneBook[i], file);
+	}
+}
 
-	// Writes the contact at the end of the file.
-	fprintf(file,"%s ", record.lastName);
-	fprintf(file,"%s\n", record.firstName);
-	fprintf(file,"%s\n", record.phoneNum);
+void printAllToFile(FILE *fPtr) {
 
-	// Releases the file.
-	fflush(file);
+	FILE * phones = fopen("phones.txt", "wb+");
+
+	if (phones != NULL) {
+		printContacts(phones);
+		fclose(phones);
+		return;
+	}
+
+	printf("Error: Error creating the phones.txt file.\n");
+}
+
+void updateDB(FILE * fPtr) {
+	printContacts(fPtr);
 }
 
 void addRecord(FILE *fPtr) {
-	struct phoneRecord newContact;
 
-	char buffer[20];
 	printf("Contact:\n");
 
 	if (fPtr != NULL) {
 
-		if(!askFor("Last Name", buffer)) {
-			strncpy(newContact.lastName, buffer, 20);
+		askFor("Last Name", phoneBook[curr].lastName);
+		askFor("First Name", phoneBook[curr].firstName);
+		askFor("Phone Number", phoneBook[curr].phoneNum);
 
-			if(!askFor("First Name", buffer)) {
-				strncpy(newContact.firstName, buffer, 20);
-
-				if(!askFor("Phone Number", buffer)) {
-					strncpy(newContact.phoneNum, buffer, 15);
-
-					//writeContact(newContact, stdout);
-					writeContact(newContact, fPtr);
-					return;
-				}
-			}
-		}
+		printContact(phoneBook[curr], stdout);
+		curr++;
+		updateDB(fPtr);
+		return;
 	}
 
 	printf("Error: Getting the contact info did not work.\n");
 }
 
-void findPhoneNum(FILE *fPtr) {
+int findPhoneNum(FILE *fPtr) {
 
-	char buffer[41];
-	char searched[41];
+	char searched[20];
 
-	if (fPtr != NULL) {
+	printf("I will return the FIRST MATCH:\n");
+	askFor("First Name OR Last Name", searched);
 
-		if(!askFor("Phone Number", buffer)) {
+	int i;
+	// Reads the file looking for the name given.
+	for (i=0; i < curr; i++) {
+		
+		if (strcmp(phoneBook[i].firstName, searched)) {
+			printf("Matched by First Name (%i):\n", i);
+			printContact(phoneBook[i], stdout);
+			return i;
+		}
 
-			// Reads the file looking for the name given.
-			while(fgets(buffer, sizeof(buffer), fPtr) != NULL) {
-
-				if (strcmp(searched, buffer)) {
-					
-					printf("Number found: ");
-					fgets(buffer, sizeof(buffer), fPtr);
-					printf("%s\n", buffer);
-					return;
-
-				}
-			}
+		if (strcmp(phoneBook[i].lastName, searched)) {
+			printf("Matched by Last Name (%i):\n", i);
+			printContact(phoneBook[i], stdout);
+			return i;
 		}
 	}
-
+	
 	printf("Error: Contact could not be found.\n");
+	return -1;
 }
 
 void deleteRecord(FILE *fPtr) {
 
-	char buffer[41];
-	char toDelete[41];
-	FILE * reWriter = fopen("myPhoneBookDB", "rb+");
+	int toDelete = findPhoneNum(fPtr);
 
-	if (fPtr != NULL) {
+	if (toDelete < 0) {
 
-		if(!askFor("Contact Name", buffer)) {
+	} else {
+		curr--;
+		strcpy(phoneBook[toDelete].lastName,
+			phoneBook[curr].lastName);
+		strcpy(phoneBook[toDelete].firstName,
+			phoneBook[curr].firstName);
+		strcpy(phoneBook[toDelete].phoneNum,
+			phoneBook[curr].phoneNum);
 
-			// Reads the file looking for the name given.
-			while(fgets(buffer, sizeof(buffer), fPtr) != NULL) {
-
-				if (!strcmp(toDelete, buffer)) {
-					
-					printf("Deleting: ");
-					fgets(buffer, sizeof(buffer), fPtr);
-					printf("%s", buffer);
-					return;
-
-				} else {
-					fprintf(reWriter,"%s", buffer);
-					fflush(reWriter);
-				}
-			}
-			return;
-		}
+		updateDB(fPtr);
+		return;
 	}
 
 	printf("Error: Contact could not be deleted.\n");
@@ -125,25 +127,4 @@ void updateRecord(FILE *fPtr){
 
 	deleteRecord(fPtr);
 	addRecord(fPtr);
-
-}
-
-void printAllToFile(FILE *fPtr) {
-
-	char buffer[41];
-	FILE * phone = fopen("phones.txt", "wb+");
-
-	if (fPtr != NULL && phone != NULL) {
-
-		while(fgets(buffer, sizeof(buffer), fPtr) != NULL) {
-
-			fprintf(phone,"%s", buffer);	
-		}
-
-		fflush(phone);
-		return;
-	}
-
-	printf("Error: Error creating the phones.txt file.\n");
-
 }

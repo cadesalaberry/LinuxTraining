@@ -44,6 +44,8 @@ unsigned int enterChoice(void)
 	unsigned int menuChoice; //variable to store user’s choice
 
 	// display available options
+	printf("\n!REMEMBER TO BACKUP YOUR CONTACTS IN A TEXT FILE!\n");
+	printf("!!!BEFORE EXITING THE APP OR DATA MIGHT BE LOST!!\n\n");
 	printf("Enter your choice:\n");
 	printf("1 --- add a new phone record\n");
 	printf("2 --- find a phone number of a given user \n");
